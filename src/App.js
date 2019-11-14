@@ -2,11 +2,24 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import Clock from "./Clock";
+import PeopleForm from "./PeopleForm";
 
 import People from "./People";
 export default class App extends Component {
   state = {
-    showPeople: true
+    showPeople: true,
+    people: [
+      { name: "Nica", language: "React" },
+      { name: "Ahmed", language: "Ruby" },
+      { name: "Audrea", language: "Python" },
+      { name: "Baron", language: "Elixer" }
+    ]
+  };
+
+  addPerson = person => {
+    this.setState(prevState => {
+      return { people: [...prevState.people, person] };
+    });
   };
 
   togglePeople = () => {
@@ -24,7 +37,12 @@ export default class App extends Component {
           <button onClick={this.togglePeople}>
             {this.state.showPeople ? "hide" : "show"}
           </button>
-          {this.state.showPeople ? <People coders={this.props.people} /> : null}
+          {this.state.showPeople ? (
+            <div>
+              <People coders={this.state.people} />
+              <PeopleForm addPerson={this.addPerson} />
+            </div>
+          ) : null}
           <a
             className="App-link"
             href="https://reactjs.org"
@@ -38,27 +56,3 @@ export default class App extends Component {
     );
   }
 }
-
-// function App(props) {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>Hello world!</p>
-//         <ul>
-//           {props.names.map(name => {
-//             return <li>{name}</li>;
-//           })}
-//         </ul>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
