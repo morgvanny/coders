@@ -1,10 +1,13 @@
 import React from "react";
 
 export default class PeopleForm extends React.Component {
-  state = {
-    name: "",
-    language: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      language: ""
+    };
+  }
 
   handleSubmit = e => {
     e.preventDefault();

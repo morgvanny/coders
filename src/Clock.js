@@ -2,12 +2,15 @@ import React from "react";
 
 export default class Clock extends React.Component {
   state = {
-    date: new Date()
+    date: new Date(),
+    p: "waiting for componentDidMount"
   };
 
   componentDidMount() {
-    console.log("starting interval");
     this.startClock();
+    setTimeout(() => {
+      this.setState({ p: "componentDidMount was called" });
+    }, 3000);
   }
 
   startClock = () => {
@@ -21,7 +24,7 @@ export default class Clock extends React.Component {
   };
 
   componentWillUnmount() {
-    console.log("clearing interval");
+    // console.log("clearing interval");
     clearInterval(this.interval);
   }
 
@@ -29,6 +32,7 @@ export default class Clock extends React.Component {
     console.log("rendering clock");
     return (
       <div>
+        <p>{this.state.p}</p>
         <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
       </div>
     );
